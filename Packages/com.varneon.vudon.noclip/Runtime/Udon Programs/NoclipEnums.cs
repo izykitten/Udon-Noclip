@@ -6,6 +6,7 @@
     public enum NoclipTriggerMethod
     {
         DoubleJump,
+        FiveJumps,
         APIOnly
     }
 }

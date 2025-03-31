@@ -2,7 +2,6 @@
 using UdonSharp;
 using UnityEngine;
 using Varneon.VUdon.Noclip.Enums;
-using Varneon.VInspector;
 using VRC.SDKBase;
 using VRC.Udon.Common;
 
@@ -24,7 +23,6 @@ namespace Varneon.VUdon.Noclip
         [Header("Settings")]
         [SerializeField]
         [Tooltip("Method for triggering the noclip mode")]
-        [FieldParentElement("Foldout_Settings")]
         private NoclipTriggerMethod noclipTriggerMethod = NoclipTriggerMethod.DoubleJump;
 
         /// <summary>
@@ -33,7 +31,6 @@ namespace Varneon.VUdon.Noclip
         [SerializeField]
         [Tooltip("Time in which jump has to be double tapped in order to toggle noclip")]
         [Range(0.1f, 1f)]
-        [FieldParentElement("Foldout_Settings")]
         private float toggleThreshold = 0.25f;
 
         /// <summary>
@@ -42,7 +39,6 @@ namespace Varneon.VUdon.Noclip
         [SerializeField]
         [Tooltip("Maximum speed in m/s")]
         [Range(1f, 50f)]
-        [FieldParentElement("Foldout_Settings")]
         private float speed = 15f;
 
         /// <summary>
@@ -50,8 +46,6 @@ namespace Varneon.VUdon.Noclip
         /// </summary>
         [Header("VR")]
         [SerializeField]
-        [FieldParentElement("Foldout_VR")]
-        [FieldLabel("Input Multiplier")]
         [Tooltip("Input speed multiplier curve for VR.\n\nHorizontal (0-1): VR movement input magnitude\n\nVertical (0-1): Speed multiplier")]
         private AnimationCurve vrInputMultiplier = new AnimationCurve(new Keyframe(0f, 0f, 0f, 0f), new Keyframe(1f, 1f, 2f, 2f));
 
@@ -62,8 +56,6 @@ namespace Varneon.VUdon.Noclip
         [SerializeField]
         [Tooltip("Speed multiplier when Shift is not pressed")]
         [Range(0.1f, 1f)]
-        [FieldParentElement("Foldout_Desktop")]
-        [FieldLabel("Speed Fraction")]
         private float desktopSpeedFraction = 0.25f;
 
         /// <summary>
@@ -71,8 +63,6 @@ namespace Varneon.VUdon.Noclip
         /// </summary>
         [SerializeField]
         [Tooltip("Allow vertical movement on desktop")]
-        [FieldParentElement("Foldout_Desktop")]
-        [FieldLabel("Allow Vertical Input")]
         private bool desktopVerticalInput = true;
 
         /// <summary>
@@ -80,7 +70,6 @@ namespace Varneon.VUdon.Noclip
         /// </summary>
         [SerializeField]
         [Tooltip("Key for ascending on desktop")]
-        [FieldParentElement("Foldout_Desktop")]
         private KeyCode upKey = KeyCode.E;
 
         /// <summary>
@@ -88,7 +77,6 @@ namespace Varneon.VUdon.Noclip
         /// </summary>
         [SerializeField]
         [Tooltip("Key for descending on desktop")]
-        [FieldParentElement("Foldout_Desktop")]
         private KeyCode downKey = KeyCode.Q;
         #endregion // Serialized Fields
 
@@ -359,7 +347,6 @@ namespace Varneon.VUdon.Noclip
         /// <summary>
         /// Enables noclip
         /// </summary>
-        [PublicAPI("Enables noclip")]
         public void _EnableNoclip()
         {
             SetNoclipEnabled(true);
@@ -368,7 +355,6 @@ namespace Varneon.VUdon.Noclip
         /// <summary>
         /// Disables noclip
         /// </summary>
-        [PublicAPI("Disables noclip")]
         public void _DisableNoclip()
         {
             SetNoclipEnabled(false);
@@ -377,7 +363,6 @@ namespace Varneon.VUdon.Noclip
         /// <summary>
         /// Sets noclip enabled
         /// </summary>
-        [PublicAPI("Sets noclip enabled")]
         public void _SetNoclipEnabled(bool enabled)
         {
             SetNoclipEnabled(enabled);
@@ -387,7 +372,6 @@ namespace Varneon.VUdon.Noclip
         /// Sets the noclip max speed
         /// </summary>
         /// <param name="maxSpeed"></param>
-        [PublicAPI("Sets the noclip max speed")]
         public void _SetMaxSpeed(float maxSpeed)
         {
             speed = maxSpeed;

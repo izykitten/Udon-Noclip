@@ -2,8 +2,7 @@
     "name": "Varneon.VUdon.Noclip.Runtime",
     "references": [
         "UdonSharp.Runtime",
-        "VRC.Udon",
-        "Varneon.V-Inspector.Runtime"
+        "VRC.Udon"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

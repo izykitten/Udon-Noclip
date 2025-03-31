@@ -1,18 +1,19 @@
 ﻿using UdonSharp;
 using UnityEngine;
-using Varneon.VUdon.Noclip.Enums;
+using izy.Udon.Noclip.Enums;
 using VRC.SDKBase;
 using VRC.Udon.Common;
 
-namespace Varneon.VUdon.Noclip
+namespace izy.Udon.Noclip
 {
     /// <summary>
     /// Simple noclip
     /// </summary>
     [SelectionBase]
     [DefaultExecutionOrder(-1000000000)]
-    [HelpURL("https://github.com/Varneon/VUdon-Noclip/wiki/Settings")]
+    [HelpURL("https://github.com/izykitten/Udon-Noclip/wiki/Settings")]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [AddComponentMenu("izy/Noclip")]
     public class Noclip : UdonSharpBehaviour
     {
         #region Serialized Fields
@@ -46,7 +47,7 @@ namespace Varneon.VUdon.Noclip
         [Header("VR")]
         [SerializeField]
         [Tooltip("Input speed multiplier curve for VR.\n\nHorizontal (0-1): VR movement input magnitude\n\nVertical (0-1): Speed multiplier")]
-        private AnimationCurve vrInputMultiplier = null;
+        private AnimationCurve vrInputMultiplier = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, 1f));
 
         /// <summary>
         /// Speed multiplier when Shift is not pressed
@@ -171,15 +172,6 @@ namespace Varneon.VUdon.Noclip
 
         private void OnEnable()
         {
-            // Initialize animation curve if it's null
-            if (vrInputMultiplier == null)
-            {
-                vrInputMultiplier = new AnimationCurve();
-                // Use AddKey with direct float values instead of creating Keyframe objects
-                vrInputMultiplier.AddKey(0f, 0f);
-                vrInputMultiplier.AddKey(1f, 1f);
-            }
-
             // Make sure the string array is initialized
             if (allowedUsernames == null)
             {

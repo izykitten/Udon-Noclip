@@ -1,4 +1,4 @@
-﻿namespace Varneon.VUdon.Noclip.Enums
+﻿namespace izy.Udon.Noclip.Enums
 {
     /// <summary>
     /// Methdod for triggering noclip

@@ -1,13 +1,11 @@
 {
-    "name": "Varneon.VUdon.Noclip.Editor",
+    "name": "izy.Udon.Noclip.Runtime",
+    "rootNamespace": "",
     "references": [
-        "Varneon.VUdon.Noclip.Runtime",
         "UdonSharp.Runtime",
-        "UdonSharp.Editor"
+        "VRC.Udon"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

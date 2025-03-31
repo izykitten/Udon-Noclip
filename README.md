@@ -1,63 +1,102 @@
 <div>
 
-# [VUdon](https://github.com/Varneon/VUdon) - Noclip [![GitHub](https://img.shields.io/github/license/Varneon/VUdon-Noclip?color=blue&label=License&style=flat)](https://github.com/Varneon/VUdon-Noclip/blob/main/LICENSE) [![GitHub Repo stars](https://img.shields.io/github/stars/Varneon/VUdon-Noclip?style=flat&label=Stars)](https://github.com/Varneon/VUdon-Noclip/stargazers) [![GitHub all releases](https://img.shields.io/github/downloads/Varneon/VUdon-Noclip/total?color=blue&label=Downloads&style=flat)](https://github.com/Varneon/VUdon-Noclip/releases) [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Varneon/VUdon-Noclip?color=blue&label=Release&sort=semver&style=flat)](https://github.com/Varneon/VUdon-Noclip/releases/latest)
+# Udon Noclip [![GitHub](https://img.shields.io/github/license/izykitten/VUdon-Noclip?color=blue&label=License&style=flat)](https://github.com/izykitten/VUdon-Noclip/blob/main/LICENSE) [![GitHub Repo stars](https://img.shields.io/github/stars/izykitten/VUdon-Noclip?style=flat&label=Stars)](https://github.com/izykitten/VUdon-Noclip/stargazers) [![GitHub all releases](https://img.shields.io/github/downloads/izykitten/VUdon-Noclip/total?color=blue&label=Downloads&style=flat)](https://github.com/izykitten/VUdon-Noclip/releases) [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/izykitten/VUdon-Noclip?color=blue&label=Release&sort=semver&style=flat)](https://github.com/izykitten/VUdon-Noclip/releases/latest)
 
 </div>
 
-Noclip prefab for VRChat worlds.
+Noclip prefab for VRChat worlds that allows players to fly through walls and objects, similar to noclip mode in Source games.
 
-> _If you're used to the noclip from Source games (Garry's Mod, CS:S, CS:GO, etc., you should feel comfortable using this)_
+## Features
 
-# How To Use
+- Fly freely through any objects and walls
+- Multiple activation methods: double jump, five jumps, or API-only
+- Full VR and Desktop support with customizable controls
+- Adjustable speed settings
+- User restriction capabilities
+- Automatic deactivation on respawn
 
-* Drag and drop the `Noclip` prefab from `Packages/VUdon - Noclip` into your scene
+## How To Use
 
-> **NOTE:** If you want to prevent users from activating noclip, **_DISABLE THE COMPONENT!_** _(Proper support for noclip permissions will be added in a future release)_
+1. Drag and drop the `Noclip` prefab `Noclip` into your scene.
+2. Configure the settings in the Inspector to your preference.
+3. Players can toggle noclip based on your chosen activation method.
 
-![image](https://user-images.githubusercontent.com/26690821/192450728-b17e2bcb-745b-4100-97e9-cf2b9c7ca909.png)
+> **NOTE:** To prevent users from activating noclip, **_DISABLE THE COMPONENT!_**
+
+## Controls
+
+### Activation Methods
+- **Double Jump:** Quickly press jump twice to toggle noclip.
+- **Five Jumps:** Press jump five times in quick succession to toggle noclip.
+- **API Only:** Noclip can only be activated through UdonSharp API calls.
+
+### Movement Controls
+#### VR
+- **Movement:** Use your regular VR movement controls.
+- **Vertical:** Look up or down while moving to ascend/descend.
+
+#### Desktop
+- **WASD:** Forward/Left/Back/Right movement.
+- **Space:** Ascend (default).
+- **Left Shift:** Descend (default).
+- **Left Control:** Speed boost (when held).
+
+## Configuration Options
+
+### Basic Settings
+- **Noclip Trigger Method:** Choose how players activate noclip (Double Jump, Five Jumps, or API Only).
+- **Toggle Threshold:** Time window for detecting double jumps or consecutive jumps (0.1s to 5s).
+- **Speed:** Maximum movement speed in m/s (1-50).
+
+### VR Settings
+- **VR Input Multiplier:** Curve that maps VR movement input to speed multiplier.
+
+### Desktop Settings
+- **Desktop Speed Fraction:** Speed multiplier when not holding Shift.
+- **Desktop Vertical Input:** Enable/disable vertical movement on desktop.
+- **Up/Down Keys:** Customize keys for ascending/descending.
+
+### User Restrictions
+- **Restrict to Specific Users:** Enable to only allow listed users to use noclip.
+- **Allowed Usernames:** List of users who can activate noclip when restrictions are enabled.
+
+## API Methods
+
+The noclip system provides several UdonSharp API methods:
+
+```csharp
+// Enable/disable noclip
+_EnableNoclip();
+_DisableNoclip();
+_SetNoclipEnabled(bool enabled);
+
+// Configure settings
+_SetMaxSpeed(float maxSpeed);
+
+// User management
+_AddAllowedUser(string username);
+_RemoveAllowedUser(string username);
+_AddSelfToAllowedList();
+_ClearAllowedUsers();
+_SetUserRestrictions(bool restrict);
+```
 
 # Installation
 
-<details><summary>
+### Using VRChat Creator Companion
 
-### Dependencies - `2`</summary>
-
-* [Neon Inspector](https://github.com/Varneon/Neon-Inspector)
-  * [V-Inspector](https://github.com/Varneon/V-Inspector)
-
-</details><details><summary>
-
-### Import with [VRChat Creator Companion](https://vcc.docs.vrchat.com/vpm/packages#user-packages):</summary>
-
-> 1. Download `com.varneon.vudon.noclip.zip` from [here](https://github.com/Varneon/VUdon-Noclip/releases/latest)
-> 2. Unpack the .zip somewhere
-> 3. In VRChat Creator Companion, navigate to `Settings` > `User Packages` > `Add`
-> 4. Navigate to the unpacked folder, `com.varneon.vudon.noclip` and click `Select Folder`
-> 5. `VUdon - Noclip` should now be visible under `Local User Packages` in the project view in VRChat Creator Companion
-> 6. Click `Add`
-
-</details><details><summary>
-
-### Import with [Unity Package Manager (git)](https://docs.unity3d.com/2019.4/Documentation/Manual/upm-ui-giturl.html):</summary>
-
-> 1. In the Unity toolbar, select `Window` > `Package Manager` > `[+]` > `Add package from git URL...` 
-> 2. Paste the following link: `https://github.com/Varneon/VUdon-Noclip.git?path=/Packages/com.varneon.vudon.noclip`
-
-</details><details><summary>
-
-### Import from [Unitypackage](https://docs.unity3d.com/2019.4/Documentation/Manual/AssetPackagesImport.html):</summary>
-
-> 1. Download latest `com.varneon.vudon.noclip.unitypackage` from [here](https://github.com/Varneon/VUdon-Noclip/releases/latest)
-> 2. Import the downloaded .unitypackage into your Unity project
-
-</details>
+1. Open the [VRChat Creator Companion](https://vcc.docs.vrchat.com/).
+2. Navigate to the `Settings` tab.
+3. Add the following repository URL under `User Repositories`:  
+   `https://vpm.izy.sh/`
+4. Go to the `Projects` tab and open your project.
+5. In the `Packages` tab, search for `Udon Noclip`.
+6. Click `Add` to include the package in your project.
 
 <div align="center">
 
-## Developed by Varneon with :hearts:
+## Modified by izy, originally developed by Varneon with :hearts:
 
-[![Twitter Follow](https://img.shields.io/static/v1?style=for-the-badge&label=@Varneon&message=4.9K&color=1b9df0&logo=twitter)](https://twitter.com/Varneon)
-[![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UCKTxeXy7gyaxr-YA9qGWOYg?color=%23FF0000&label=Varneon&logo=YouTube&style=for-the-badge)](https://www.youtube.com/Varneon)
-[![GitHub followers](https://img.shields.io/github/followers/Varneon?color=%23303030&label=Varneon&logo=GitHub&style=for-the-badge)](https://github.com/Varneon)
+[![GitHub](https://img.shields.io/github/followers/izy?color=%23303030&label=izy&logo=GitHub&style=for-the-badge)](https://github.com/izy)
 
 </div>

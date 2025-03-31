@@ -1,0 +1,19 @@
+{
+  "name": "com.izy.noclip",
+  "displayName": "Udon Noclip",
+  "version": "0.3.0",
+  "unity": "2022.3",
+  "unityRelease": "22f1",
+  "description": "Noclip for worlds",
+  "author": {
+    "name": "izy",
+    "url": "https://github.com/izykitten"
+  },
+  "dependencies": {
+    "com.vrchat.worlds": "3.5.0"
+  },
+  "vpmDependencies": {
+    "com.vrchat.worlds": "3.x.x"
+  },
+  "resolutionStrategy": "highestMinor"
+}

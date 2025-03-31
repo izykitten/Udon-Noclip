@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
 
 env:
-  packageName: "com.varneon.vudon.noclip"
+  packageName: "com.izy.noclip"
+  repoName: "Udon Noclip"
+  githubUser: "izykitten"
 
 jobs:
   build:
@@ -14,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
     
-      - name: get version
+      - name: Get Version
         id: version
         uses: notiz-dev/github-action-json-property@7c8cf5cc36eb85d8d287a8086a39dac59628eb31
         with: 
@@ -25,9 +27,16 @@ jobs:
     
       - name: Set Environment Variables
         run: |
-          echo "zipFile=${{ env.packageName }}-${{ steps.version.outputs.prop }}".zip >> $GITHUB_ENV
+          echo "zipFile=${{ env.packageName }}-${{ steps.version.outputs.prop }}.zip" >> $GITHUB_ENV
           echo "unityPackage=${{ env.packageName }}-${{ steps.version.outputs.prop }}.unitypackage" >> $GITHUB_ENV
-        
+          
+      - name: Update README URLs
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "github.com/izy/Udon - Noclip"
+          replace: "github.com/${{ env.githubUser }}/${{ env.repoName }}"
+          include: "**/*.md"
+          
       - name: Create Zip
         uses: thedoctor0/zip-release@09336613be18a8208dfa66bd57efafd9e2685657
         with:
@@ -35,7 +44,10 @@ jobs:
           directory: "Packages/${{env.packageName}}/"
           filename: "../../${{env.zipFile}}" # make the zip file two directories up, since we start two directories in above
           
-      - run: find "Packages/${{env.packageName}}/" -name \*.meta >> metaList
+      - name: Create Meta Files List
+        run: |
+          mkdir -p /tmp/tmp
+          find Packages/${{env.packageName}}/ -name "*.meta" > metaList
           
       - name: Create UnityPackage
         uses: pCYSl5EDgo/create-unitypackage@e28c7a4616b2754c564b0a959a03b3c89b756fdb
@@ -43,13 +55,13 @@ jobs:
           package-path: ${{ env.unityPackage }}
           include-files: metaList
         
-        
       - name: Make Release
         uses: softprops/action-gh-release@1e07f4398721186383de40550babbdf2b84acfc5
         with:
           tag_name: ${{ steps.version.outputs.prop }}
-          draft: true
+          draft: false
           files: |
             ${{ env.zipFile }}
             ${{ env.unityPackage }}
             Packages/${{ env.packageName }}/package.json
+            README.md

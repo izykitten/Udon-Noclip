@@ -21,7 +21,7 @@ MonoBehaviour:
   compiledVersion: 2
   behaviourSyncMode: 1
   hasInteractEvent: 0
-  scriptID: -1598890478726347409
+  scriptID: 5697657271786542473
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: Varneon.VUdon.Noclip.Enums.NoclipTriggerMethod, Varneon.VUdon.Noclip.Runtime
+      Data: izy.Udon.Noclip.Enums.NoclipTriggerMethod, izy.Udon.Noclip.Runtime
     - Name: 
       Entry: 8
       Data: 

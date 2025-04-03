@@ -175,7 +175,15 @@ namespace izy.Udon.Noclip
             // Make sure the string array is initialized
             if (allowedUsernames == null)
             {
-                allowedUsernames = new string[0];
+                allowedUsernames = new string[0]; // Keep this initialization as it's needed
+            }
+
+            if (vrInputMultiplier == null)
+            {
+                // Create curve differently to avoid array initialization issues
+                vrInputMultiplier = new AnimationCurve();
+                vrInputMultiplier.AddKey(0f, 0f);
+                vrInputMultiplier.AddKey(1f, 1f);
             }
         }
 
@@ -497,19 +505,13 @@ namespace izy.Udon.Noclip
                 }
             }
             
-            // Create new array with one more slot
+            // Manual array resize for Udon compatibility
             string[] newArray = new string[allowedUsernames.Length + 1];
-            
-            // Copy existing elements
             for (int i = 0; i < allowedUsernames.Length; i++)
             {
                 newArray[i] = allowedUsernames[i];
             }
-            
-            // Add new username to the end
-            newArray[newArray.Length - 1] = username;
-            
-            // Replace old array
+            newArray[allowedUsernames.Length] = username;
             allowedUsernames = newArray;
             
             // Update allowed status
@@ -548,10 +550,8 @@ namespace izy.Udon.Noclip
                 return;
             }
             
-            // Create new array with one fewer slot
+            // Create new array without the removed username
             string[] newArray = new string[itemsToKeep];
-            
-            // Copy all elements except the one to remove
             int newIndex = 0;
             for (int i = 0; i < allowedUsernames.Length; i++)
             {
@@ -562,7 +562,6 @@ namespace izy.Udon.Noclip
                 }
             }
             
-            // Replace old array
             allowedUsernames = newArray;
             
             // Update allowed status
@@ -585,7 +584,9 @@ namespace izy.Udon.Noclip
         /// </summary>
         public void _ClearAllowedUsers()
         {
-            allowedUsernames = new string[0];
+            // Directly assign empty array without using constructor
+            string[] emptyArray = new string[0];
+            allowedUsernames = emptyArray;
             userIsAllowed = !restrictToSpecificUsers;
         }
 
